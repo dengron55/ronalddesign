@@ -48,7 +48,7 @@ function Nav() {
     }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <RDLogo height={44} />
+          <RDLogo height={64} />
         </div>
         <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
           {["Services", "Portfolio", "About", "Contact"].map(item => (
