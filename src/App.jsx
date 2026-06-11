@@ -390,56 +390,29 @@ function Contact() {
   const [form, setForm] = useState({ name: "", email: "", type: "", message: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
-  const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSf-kfK29QPVi7u2ZiHTAYlSEc14XyeuZ3OOso4pU3tV3FcjQA/formResponse";
-  const ENTRY = {
-    name: "entry.2131175563",
-    email: "entry.411922644",
-    type: "entry.9416628",
-    message: "entry.1715203821",
-  };
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyH4ogbI8iFKAp1KglA5k_sAUp35UNXGI6ZZUurxhK6WNbHD3cTTg0_i-3j3egwmp9j/exec";
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setSending(true);
-
-    // Build query string and submit via hidden iframe (bypasses CORS)
-    const params = new URLSearchParams({
-      [ENTRY.name]: form.name,
-      [ENTRY.email]: form.email,
-      [ENTRY.type]: form.type,
-      [ENTRY.message]: form.message,
-    });
-
-    const iframe = document.createElement("iframe");
-    iframe.name = "hidden_iframe";
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-
-    const formEl = document.createElement("form");
-    formEl.method = "POST";
-    formEl.action = GOOGLE_FORM_ACTION;
-    formEl.target = "hidden_iframe";
-
-    params.forEach((value, key) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = value;
-      formEl.appendChild(input);
-    });
-
-    document.body.appendChild(formEl);
-    formEl.submit();
-
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      document.body.removeChild(formEl);
-      setSending(false);
+    setError(false);
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       setSent(true);
-    }, 1500);
+    } catch (err) {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -487,6 +460,11 @@ function Contact() {
               onFocus={e => e.target.style.borderColor = "#2563eb"}
               onBlur={e => e.target.style.borderColor = "rgba(248,250,252,0.12)"}
             />
+            {error && (
+              <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", borderRadius: 10, padding: "12px 16px", color: "#fca5a5", fontSize: 14 }}>
+                Something went wrong. Please try again or email me directly.
+              </div>
+            )}
             <button type="submit" disabled={sending} style={{
               background: sending ? "#1d4ed8" : "#2563eb", color: "#fff", border: "none", borderRadius: 10,
               padding: "14px", fontSize: 16, fontWeight: 600, cursor: sending ? "not-allowed" : "pointer",
