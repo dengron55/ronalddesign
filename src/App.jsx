@@ -401,19 +401,45 @@ function Contact() {
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     setSending(true);
-    const body = new FormData();
-    body.append(ENTRY.name, form.name);
-    body.append(ENTRY.email, form.email);
-    body.append(ENTRY.type, form.type);
-    body.append(ENTRY.message, form.message);
-    try {
-      await fetch(GOOGLE_FORM_ACTION, { method: "POST", body, mode: "no-cors" });
-    } catch (_) {}
-    setSending(false);
-    setSent(true);
+
+    // Build query string and submit via hidden iframe (bypasses CORS)
+    const params = new URLSearchParams({
+      [ENTRY.name]: form.name,
+      [ENTRY.email]: form.email,
+      [ENTRY.type]: form.type,
+      [ENTRY.message]: form.message,
+    });
+
+    const iframe = document.createElement("iframe");
+    iframe.name = "hidden_iframe";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    const formEl = document.createElement("form");
+    formEl.method = "POST";
+    formEl.action = GOOGLE_FORM_ACTION;
+    formEl.target = "hidden_iframe";
+
+    params.forEach((value, key) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = value;
+      formEl.appendChild(input);
+    });
+
+    document.body.appendChild(formEl);
+    formEl.submit();
+
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      document.body.removeChild(formEl);
+      setSending(false);
+      setSent(true);
+    }, 1500);
   };
 
   return (
@@ -482,7 +508,7 @@ function Footer() {
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <RDLogo height={28} style={{ opacity: 0.75, filter: "brightness(1.3)" }} />
-          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 13 }}>© 2025 Ronald Design</span>
+          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 13 }}>© 2026 Ronald Design</span>
         </div>
         <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 12 }}>Built with React · Deployed on Vercel</span>
       </div>
