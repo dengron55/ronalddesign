@@ -30,11 +30,17 @@ function useTypingEffect(words) {
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn);
     return () => window.removeEventListener("scroll", fn);
   }, []);
+
+  const navLinks = ["Services", "Portfolio", "About", "Contact"];
+
+  const handleLinkClick = () => setMenuOpen(false);
 
   return (
     <nav style={{
@@ -43,15 +49,17 @@ function Nav() {
       backdropFilter: "blur(12px)",
       borderBottom: "1px solid rgba(0,0,0,0.08)",
       transition: "all 0.3s ease",
-      padding: "0 2rem",
       boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.10)" : "0 1px 4px rgba(0,0,0,0.06)",
     }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+      {/* Main bar */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <RDLogo height={64} />
         </div>
-        <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-          {["Services", "Portfolio", "About", "Contact"].map(item => (
+
+        {/* Desktop links */}
+        <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="rd-desktop-nav">
+          {navLinks.map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} style={{ color: "#1e293b", fontSize: 14, fontWeight: 500, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={e => e.target.style.color = "#2563eb"}
               onMouseLeave={e => e.target.style.color = "#1e293b"}
@@ -66,7 +74,56 @@ function Nav() {
             onMouseLeave={e => e.target.style.background = "#2563eb"}
           >Free Quote</a>
         </div>
+
+        {/* Hamburger button — mobile only */}
+        <button
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+          style={{
+            display: "none",
+            background: "transparent", border: "1px solid rgba(0,0,0,0.15)",
+            borderRadius: 8, padding: "7px 10px", cursor: "pointer",
+            flexDirection: "column", gap: 5, alignItems: "center", justifyContent: "center",
+          }}
+          className="rd-hamburger"
+        >
+          <span style={{ display: "block", width: 22, height: 2, background: "#1e293b", borderRadius: 2, transition: "transform 0.2s, opacity 0.2s", transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
+          <span style={{ display: "block", width: 22, height: 2, background: "#1e293b", borderRadius: 2, transition: "opacity 0.2s", opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: "block", width: 22, height: 2, background: "#1e293b", borderRadius: 2, transition: "transform 0.2s, opacity 0.2s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
+        </button>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div style={{
+          background: "rgba(218,222,224,0.98)",
+          borderTop: "1px solid rgba(0,0,0,0.07)",
+          padding: "12px 1.5rem 20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 0,
+        }}>
+          {navLinks.map(item => (
+            <a key={item} href={`#${item.toLowerCase()}`} onClick={handleLinkClick} style={{
+              color: "#1e293b", fontSize: 15, fontWeight: 500, textDecoration: "none",
+              padding: "12px 0", borderBottom: "1px solid rgba(0,0,0,0.06)",
+              display: "block",
+            }}>{item}</a>
+          ))}
+          <a href="#contact" onClick={handleLinkClick} style={{
+            display: "block", marginTop: 14, background: "#2563eb", color: "#fff",
+            padding: "12px 0", borderRadius: 8, fontSize: 15, fontWeight: 600,
+            textDecoration: "none", textAlign: "center",
+          }}>Free Quote</a>
+        </div>
+      )}
+
+      <style>{`
+        @media (max-width: 640px) {
+          .rd-desktop-nav { display: none !important; }
+          .rd-hamburger { display: flex !important; }
+        }
+      `}</style>
     </nav>
   );
 }
