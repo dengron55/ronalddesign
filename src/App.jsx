@@ -389,10 +389,30 @@ function About() {
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", type: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSf-kfK29QPVi7u2ZiHTAYlSEc14XyeuZ3OOso4pU3tV3FcjQA/formResponse";
+  const ENTRY = {
+    name: "entry.2131175563",
+    email: "entry.411922644",
+    type: "entry.9416628",
+    message: "entry.1715203821",
+  };
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
+    setSending(true);
+    const body = new FormData();
+    body.append(ENTRY.name, form.name);
+    body.append(ENTRY.email, form.email);
+    body.append(ENTRY.type, form.type);
+    body.append(ENTRY.message, form.message);
+    try {
+      await fetch(GOOGLE_FORM_ACTION, { method: "POST", body, mode: "no-cors" });
+    } catch (_) {}
+    setSending(false);
     setSent(true);
   };
 
@@ -441,14 +461,14 @@ function Contact() {
               onFocus={e => e.target.style.borderColor = "#2563eb"}
               onBlur={e => e.target.style.borderColor = "rgba(248,250,252,0.12)"}
             />
-            <button type="submit" style={{
-              background: "#2563eb", color: "#fff", border: "none", borderRadius: 10,
-              padding: "14px", fontSize: 16, fontWeight: 600, cursor: "pointer",
-              transition: "background 0.2s, transform 0.15s"
+            <button type="submit" disabled={sending} style={{
+              background: sending ? "#1d4ed8" : "#2563eb", color: "#fff", border: "none", borderRadius: 10,
+              padding: "14px", fontSize: 16, fontWeight: 600, cursor: sending ? "not-allowed" : "pointer",
+              transition: "background 0.2s, transform 0.15s", opacity: sending ? 0.8 : 1
             }}
-              onMouseEnter={e => { e.target.style.background = "#1d4ed8"; e.target.style.transform = "translateY(-1px)"; }}
+              onMouseEnter={e => { if (!sending) { e.target.style.background = "#1d4ed8"; e.target.style.transform = "translateY(-1px)"; } }}
               onMouseLeave={e => { e.target.style.background = "#2563eb"; e.target.style.transform = "translateY(0)"; }}
-            >Send Message →</button>
+            >{sending ? "Sending…" : "Send Message →"}</button>
           </form>
         )}
       </div>
@@ -462,7 +482,7 @@ function Footer() {
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <RDLogo height={28} style={{ opacity: 0.75, filter: "brightness(1.3)" }} />
-          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 13 }}>© 2026 Ronald Design</span>
+          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 13 }}>© 2025 Ronald Design</span>
         </div>
         <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 12 }}>Built with React · Deployed on Vercel</span>
       </div>
