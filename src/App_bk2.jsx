@@ -154,7 +154,7 @@ function Hero() {
       <div style={{ maxWidth: 780, textAlign: "center", position: "relative" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(37,99,235,0.15)", border: "1px solid rgba(37,99,235,0.3)", borderRadius: 99, padding: "6px 16px", marginBottom: 32 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ color: "#93c5fd", fontSize: 16, fontWeight: 500 }}>Available for new projects</span>
+          <span style={{ color: "#93c5fd", fontSize: 13, fontWeight: 500 }}>Available for new projects</span>
         </div>
         <h1 style={{ color: "#f8fafc", fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 700, lineHeight: 1.15, margin: "0 0 16px" }}>
           Landing Pages That Sell<br />
@@ -167,7 +167,7 @@ function Hero() {
           </span>
         </div>
         <p style={{ color: "rgba(248,250,252,0.5)", fontSize: 16, lineHeight: 1.7, maxWidth: 560, margin: "0 auto 40px" }}>
-          React-powered, Vercel-deployed, conversion-focused. I help KDP authors and small businesses
+          React-powered, Vercel-deployed, conversion-focused. We help KDP authors and small businesses
           launch a professional web presence — fast and affordable.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
@@ -239,7 +239,7 @@ function WhyLandingPage() {
     <section style={{ background: "#0f172a", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 1050, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <span style={{ color: "#60a5fa", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Why it matters</span>
+          <span style={{ color: "#60a5fa", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Why it matters</span>
           <h2 style={{ color: "#f8fafc", fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 700, margin: "12px 0 16px" }}>
             Why Every KDP Author Needs<br />a Landing Page
           </h2>
@@ -307,7 +307,7 @@ function Services() {
     <section id="services" style={{ background: "#f8fafc", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <span style={{ color: "#2563eb", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>What we offer</span>
+          <span style={{ color: "#2563eb", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>What we offer</span>
           <h2 style={{ color: "#0f172a", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, margin: "12px 0 16px" }}>Services</h2>
           <p style={{ color: "#64748b", fontSize: 16, maxWidth: 480, margin: "0 auto" }}>Straightforward packages. No surprises. Delivered in days, not months.</p>
         </div>
@@ -346,12 +346,12 @@ function Portfolio() {
       live: true
     },
     {
-      title: "Ronald Design — Brand Website",
-      client: "Ronald Design — Personal Brand",
-      tags: ["React", "Vite", "Vercel", "Apps Script"],
-      url: "https://ronalddesign.vercel.app",
-      desc: "Full brand website for a freelance web design studio. Includes service showcase, portfolio, about, and a contact form connected to Google Sheets via Apps Script.",
-      live: true
+      title: "KDP Author Template",
+      client: "Demo project",
+      tags: ["React", "Tailwind"],
+      url: "#",
+      desc: "A reusable landing page template built for self-published authors promoting their books on Amazon.",
+      live: false
     },
     {
       title: "Small Business One-Pager",
@@ -366,7 +366,7 @@ function Portfolio() {
     <section id="portfolio" style={{ background: "#0f172a", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <span style={{ color: "#60a5fa", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Recent work</span>
+          <span style={{ color: "#60a5fa", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Recent work</span>
           <h2 style={{ color: "#f8fafc", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, margin: "12px 0 16px" }}>Portfolio</h2>
           <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 480, margin: "0 auto" }}>Real projects and demo builds — same quality, same code.</p>
         </div>
@@ -407,10 +407,10 @@ function About() {
     <section id="about" style={{ background: "#f8fafc", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 56, alignItems: "center" }}>
         <div>
-          <span style={{ color: "#2563eb", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Who we are</span>
+          <span style={{ color: "#2563eb", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Who we are</span>
           <h2 style={{ color: "#0f172a", fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 700, margin: "12px 0 20px", lineHeight: 1.25 }}>Technology meets marketing</h2>
           <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8, marginBottom: 16 }}>
-            I'm Ronald, leader of a web design and developement team, with a background in IT and over a decade of experience in marketing and sales. My team combines technical skills with an understanding of what actually converts visitors into buyers.
+            I'm Ronald, leader of a web design and developement team, with a background in IT and over a decade of experience in marketing and sales. We combine technical skills with an understanding of what actually converts visitors into buyers.
           </p>
           <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8, marginBottom: 28 }}>
             Our focus is on KDP authors and small businesses who need a professional online presence without the complexity or cost of a large agency.
@@ -476,7 +476,7 @@ function Contact() {
     <section id="contact" style={{ background: "#0f172a", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <span style={{ color: "#60a5fa", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Get in touch</span>
+          <span style={{ color: "#60a5fa", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Get in touch</span>
           <h2 style={{ color: "#f8fafc", fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 700, margin: "12px 0 14px" }}>Ready to launch your page?</h2>
           <p style={{ color: "#94a3b8", fontSize: 15 }}>Tell us about your project — We'll get back to you within 24 hours.</p>
         </div>
@@ -543,9 +543,9 @@ function Footer() {
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <RDLogo height={28} style={{ opacity: 0.75, filter: "brightness(1.3)" }} />
-          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 16 }}>© 2026 Ronald Design</span>
+          <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 13 }}>© 2026 Ronald Design</span>
         </div>
-        <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 16 }}>Built with React+Lite · Deployed on Vercel</span>
+        <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 12 }}>Built with React · Deployed on Vercel</span>
       </div>
     </footer>
   );
