@@ -545,7 +545,7 @@ function Footer() {
           <RDLogo height={28} style={{ opacity: 0.75, filter: "brightness(1.3)" }} />
           <span style={{ color: "rgba(248,250,252,0.4)", fontSize: 16 }}>© 2026 Ronald Design</span>
         </div>
-        <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 16 }}>Built with React+Lite · Deployed on Vercel</span>
+        <span style={{ color: "rgba(248,250,252,0.25)", fontSize: 16 }}>Built with React+Vite · Deployed on Vercel</span>
       </div>
     </footer>
   );
