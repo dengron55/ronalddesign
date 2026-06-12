@@ -340,7 +340,7 @@ function Portfolio() {
     {
       title: "The Digital Stress Protocol",
       client: "Rodin East — KDP Author",
-      tags: ["React", "Vite", "Vercel"],
+      tags: ["React", "Vite", "Vercel", "Apps Script"],
       url: "https://tdspen.vercel.app",
       desc: "Full landing page for an Amazon KDP non-fiction book. Conversion-optimized layout with hero, benefits, author bio, and buy CTA.",
       live: true
