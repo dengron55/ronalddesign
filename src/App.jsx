@@ -1,5 +1,137 @@
 import { useState, useEffect, useRef } from "react";
 
+function PodcastPlayer({ src }) {
+  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [muted, setMuted] = useState(false);
+
+  const togglePlay = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (playing) { a.pause(); } else { a.play(); }
+    setPlaying(!playing);
+  };
+
+  const handleTimeUpdate = () => setCurrentTime(audioRef.current?.currentTime || 0);
+  const handleLoadedMetadata = () => setDuration(audioRef.current?.duration || 0);
+  const handleEnded = () => setPlaying(false);
+
+  const seek = e => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    const newTime = ratio * duration;
+    if (audioRef.current) audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const changeVolume = e => {
+    const v = parseFloat(e.target.value);
+    setVolume(v);
+    if (audioRef.current) audioRef.current.volume = v;
+    setMuted(v === 0);
+  };
+
+  const toggleMute = () => {
+    const next = !muted;
+    setMuted(next);
+    if (audioRef.current) audioRef.current.muted = next;
+  };
+
+  const fmt = s => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  };
+
+  const progress = duration ? (currentTime / duration) * 100 : 0;
+
+  return (
+    <div style={{
+      background: "rgba(37,99,235,0.08)",
+      border: "1px solid rgba(37,99,235,0.25)",
+      borderRadius: 16, padding: "24px 28px", marginBottom: 24,
+    }}>
+      <audio ref={audioRef} src={src}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+      />
+
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
+        <div style={{ width: 48, height: 48, background: "rgba(37,99,235,0.2)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <i className="ti ti-microphone-2" style={{ fontSize: 22, color: "#60a5fa" }} aria-hidden="true" />
+        </div>
+        <div>
+          <div style={{ color: "#f8fafc", fontSize: 15, fontWeight: 600, marginBottom: 2 }}>
+            Landing Pages Beat the Amazon Algorithm
+          </div>
+          <div style={{ color: "#64748b", fontSize: 12 }}>
+            Marcus & Sarah · KDP Publishers Podcast · {fmt(duration)}
+          </div>
+        </div>
+        <div style={{ marginLeft: "auto", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 99, padding: "3px 12px" }}>
+          <span style={{ color: "#4ade80", fontSize: 11, fontWeight: 600 }}>🎙 Real KDP Authors</span>
+        </div>
+      </div>
+
+      {/* Progress bar */}
+      <div style={{ marginBottom: 12 }}>
+        <div onClick={seek} style={{
+          height: 5, background: "rgba(248,250,252,0.1)", borderRadius: 99,
+          cursor: "pointer", position: "relative", marginBottom: 6,
+        }}>
+          <div style={{ height: "100%", width: `${progress}%`, background: "#2563eb", borderRadius: 99, transition: "width 0.1s linear" }} />
+          <div style={{ position: "absolute", top: "50%", left: `${progress}%`, transform: "translate(-50%,-50%)", width: 13, height: 13, background: "#60a5fa", borderRadius: "50%", boxShadow: "0 0 0 3px rgba(37,99,235,0.3)" }} />
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span style={{ color: "#64748b", fontSize: 11 }}>{fmt(currentTime)}</span>
+          <span style={{ color: "#64748b", fontSize: 11 }}>{fmt(duration)}</span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        {/* Rewind 15s */}
+        <button onClick={() => { if (audioRef.current) audioRef.current.currentTime = Math.max(0, currentTime - 15); }} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#94a3b8", padding: 4 }} title="Back 15s">
+          <i className="ti ti-rotate-clockwise-2" style={{ fontSize: 20, transform: "scaleX(-1)", display: "block" }} aria-hidden="true" />
+        </button>
+
+        {/* Play/Pause */}
+        <button onClick={togglePlay} style={{
+          width: 48, height: 48, background: "#2563eb", border: "none", borderRadius: "50%",
+          cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+          transition: "background 0.2s, transform 0.15s", flexShrink: 0,
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#1d4ed8"; e.currentTarget.style.transform = "scale(1.05)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "#2563eb"; e.currentTarget.style.transform = "scale(1)"; }}
+        >
+          <i className={`ti ${playing ? "ti-player-pause-filled" : "ti-player-play-filled"}`} style={{ fontSize: 20, color: "#fff" }} aria-hidden="true" />
+        </button>
+
+        {/* Forward 15s */}
+        <button onClick={() => { if (audioRef.current) audioRef.current.currentTime = Math.min(duration, currentTime + 15); }} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#94a3b8", padding: 4 }} title="Forward 15s">
+          <i className="ti ti-rotate-clockwise-2" style={{ fontSize: 20, display: "block" }} aria-hidden="true" />
+        </button>
+
+        {/* Volume */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: "auto" }}>
+          <button onClick={toggleMute} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#94a3b8", padding: 4 }}>
+            <i className={`ti ${muted || volume === 0 ? "ti-volume-off" : "ti-volume"}`} style={{ fontSize: 18 }} aria-hidden="true" />
+          </button>
+          <input type="range" min="0" max="1" step="0.05" value={muted ? 0 : volume} onChange={changeVolume}
+            style={{ width: 72, accentColor: "#2563eb", cursor: "pointer" }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 const TYPING_WORDS = ["KDP Authors", "Small Businesses", "Your Brand"];
 
 function useTypingEffect(words) {
@@ -268,8 +400,17 @@ function WhyLandingPage() {
           ))}
         </div>
 
+        {/* Podcast Player */}
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ textAlign: "center", marginBottom: 20 }}>
+            <span style={{ color: "#60a5fa", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              🎙 Hear it from KDP authors themselves
+            </span>
+          </div>
+          <PodcastPlayer src="/Landing_pages_beat_the_Amazon_algorithm.m4a" />
+        </div>
+
         <div style={{
-          background: "linear-gradient(135deg, rgba(37,99,235,0.18) 0%, rgba(37,99,235,0.06) 100%)",
           border: "1px solid rgba(37,99,235,0.3)",
           borderRadius: 16, padding: "32px 36px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
