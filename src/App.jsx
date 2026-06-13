@@ -375,8 +375,8 @@ function WhyLandingPage() {
           <h2 style={{ color: "#f8fafc", fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 700, margin: "12px 0 16px" }}>
             Why Every KDP Author Needs<br />a Landing Page
           </h2>
-          <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-            Listing on Amazon is just the beginning. Without an effective measure to get readers' visibility, your book will most likely be drowned out in the vast sea of over 6 million KDP titles. A dedicated landing page is the single most effective tool to grow your readership, boost sales, and build a lasting author brand.
+          <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 560, margin: "0 auto", lineHeight: 1.7 }}>
+            Listing on Amazon is just the beginning. Without an effective measure to get readers' visibility, your book will most likely be drowned out in the vast sea of over 6 million KDP titles. Even brought in by high-cost Amazon ads, your potential customers can be easily distracted by popular, similar, related, or customers-also-viewed products. A dedicated landing page is the single most effective tool to grow your readership, increase reader resonance, boost sales, and build a lasting author brand.
           </p>
         </div>
 
