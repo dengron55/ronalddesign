@@ -376,7 +376,7 @@ function WhyLandingPage() {
             Why Every KDP Author Needs<br />a Landing Page
           </h2>
           <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-            Listing on Amazon is just the beginning. A dedicated landing page is the single most effective tool to grow your readership, boost sales, and build a lasting author brand.
+            Listing on Amazon is just the beginning. Without an effective measure to get readers' visibility, your book will most likely be drowned out in the vast sea of over 6 million KDP titles. A dedicated landing page is the single most effective tool to grow your readership, boost sales, and build a lasting author brand.
           </p>
         </div>
 
@@ -543,7 +543,7 @@ function Portfolio() {
 }
 
 function About() {
-  const stack = ["React", "Vite", "Vercel", "GitHub", "VS Code", "Tailwind CSS"];
+  const stack = ["React", "Vite", "Vercel", "GitHub", "VS Code", "Tailwind CSS", "Apps Script"];
   return (
     <section id="about" style={{ background: "#f8fafc", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 56, alignItems: "center" }}>
