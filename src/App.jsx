@@ -403,7 +403,7 @@ function WhyLandingPage() {
         {/* Podcast Player */}
         <div style={{ marginBottom: 32 }}>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
-            <span style={{ color: "#60a5fa", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            <span style={{ color: "#60a5fa", fontSize: 15, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
               🎙 Hear it from KDP authors themselves
             </span>
           </div>
