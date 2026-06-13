@@ -299,7 +299,7 @@ function Hero() {
           </span>
         </div>
         <p style={{ color: "rgba(248,250,252,0.5)", fontSize: 16, lineHeight: 1.7, maxWidth: 560, margin: "0 auto 40px" }}>
-          React-powered, Vercel-deployed, conversion-focused. I help KDP authors and small businesses
+          React-powered, Vercel-deployed, conversion-focused. We help KDP authors and small businesses
           launch a professional web presence — fast and affordable.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
