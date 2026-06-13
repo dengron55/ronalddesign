@@ -74,7 +74,7 @@ function PodcastPlayer({ src }) {
           </div>
         </div>
         <div style={{ marginLeft: "auto", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 99, padding: "3px 12px" }}>
-          <span style={{ color: "#4ade80", fontSize: 11, fontWeight: 600 }}>🎙 Real KDP Authors</span>
+          <span style={{ color: "#4ade80", fontSize: 11, fontWeight: 600 }}>🎙 KDP Authors' True Feelings</span>
         </div>
       </div>
 
