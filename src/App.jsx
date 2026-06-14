@@ -358,7 +358,7 @@ function WhyLandingPage() {
     {
       icon: "ti-share",
       title: "Easier to Promote",
-      desc: "Share one clean URL across social media, newsletters, and ads. A branded link like yourbook.com is far more compelling than a long Amazon product URL."
+      desc: "Share one clean URL across social media, newsletters, and ads. A branded link like yourbook.vercel.app or yourbook.com is far more compelling than a long Amazon product URL."
     },
     {
       icon: "ti-search",
@@ -484,15 +484,19 @@ function Portfolio() {
       tags: ["React", "Vite", "Vercel", "Apps Script"],
       url: "https://tdspen.vercel.app",
       desc: "Full landing page for an Amazon KDP non-fiction book. Conversion-optimized layout with hero, benefits, author bio, and buy CTA.",
-      live: true
+      live: true,
+      mockup: "/TDSPeBookCover3Dmockup1_transparent.png",
+      footer: "view-live"
     },
     {
       title: "Ronald Design — Brand Website",
       client: "Ronald Design — Personal Brand",
       tags: ["React", "Vite", "Vercel", "Apps Script"],
-      url: "https://ronalddesign.vercel.app",
+      url: null,
       desc: "Full brand website for a freelance web design studio. Includes service showcase, portfolio, about, and a contact form connected to Google Sheets via Apps Script.",
-      live: true
+      live: true,
+      mockup: null,
+      footer: "you-are-here"
     },
     {
       title: "Small Business One-Pager",
@@ -500,9 +504,12 @@ function Portfolio() {
       tags: ["React", "Vite", "Vercel"],
       url: "#",
       desc: "Clean business website with services, testimonials, and a contact form — designed for local businesses.",
-      live: false
+      live: false,
+      mockup: null,
+      footer: null
     },
   ];
+
   return (
     <section id="portfolio" style={{ background: "#0f172a", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -511,28 +518,47 @@ function Portfolio() {
           <h2 style={{ color: "#f8fafc", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, margin: "12px 0 16px" }}>Portfolio</h2>
           <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 480, margin: "0 auto" }}>Real projects and demo builds — same quality, same code.</p>
         </div>
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
-          {projects.map(({ title, client, tags, url, desc, live }) => (
+          {projects.map(({ title, client, tags, url, desc, live, mockup, footer }) => (
             <div key={title} style={{
               background: "rgba(248,250,252,0.04)", border: "1px solid rgba(248,250,252,0.08)",
-              borderRadius: 14, padding: "24px", transition: "border-color 0.2s, transform 0.2s"
+              borderRadius: 14, padding: "24px", transition: "border-color 0.2s, transform 0.2s",
+              display: "flex", flexDirection: "column"
             }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(37,99,235,0.4)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(248,250,252,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
+              {/* Tags + Live badge */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {tags.map(t => <span key={t} style={{ background: "rgba(37,99,235,0.2)", color: "#93c5fd", fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 99 }}>{t}</span>)}
                 </div>
-                {live && <span style={{ background: "rgba(34,197,94,0.15)", color: "#4ade80", fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 99 }}>Live</span>}
+                {live && <span style={{ background: "rgba(34,197,94,0.15)", color: "#4ade80", fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 99, flexShrink: 0 }}>Live</span>}
               </div>
+
               <h3 style={{ color: "#f8fafc", fontSize: 17, fontWeight: 600, margin: "0 0 4px" }}>{title}</h3>
               <div style={{ color: "#60a5fa", fontSize: 12, marginBottom: 10 }}>{client}</div>
-              <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, margin: "0 0 16px" }}>{desc}</p>
-              {live && (
+
+              {/* Left text, right mockup */}
+              <div style={{ display: "flex", gap: 12, alignItems: "center", margin: "0 0 16px", flexGrow: 1 }}>
+                <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, margin: 0, flexGrow: 1 }}>{desc}</p>
+                {mockup && (
+                  <img src={mockup} alt={title} style={{ width: 96, flexShrink: 0, height: "auto", filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.6))" }} />
+                )}
+              </div>
+
+              {/* Footer area */}
+              {footer === "view-live" && (
                 <a href={url} target="_blank" rel="noreferrer" style={{ color: "#60a5fa", fontSize: 13, fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
                   View live site <i className="ti ti-external-link" style={{ fontSize: 14 }} aria-hidden="true" />
                 </a>
+              )}
+              {footer === "you-are-here" && (
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80" }} />
+                  <span style={{ color: "#4ade80", fontSize: 13, fontWeight: 500 }}>You are viewing this website right now</span>
+                </div>
               )}
             </div>
           ))}
@@ -543,7 +569,7 @@ function Portfolio() {
 }
 
 function About() {
-  const stack = ["React", "Vite", "Vercel", "GitHub", "VS Code", "Tailwind CSS", "Apps Script"];
+  const stack = ["React", "Vite", "Vercel", "GitHub", "VS Code", "Tailwind CSS"];
   return (
     <section id="about" style={{ background: "#f8fafc", padding: "100px 2rem" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 56, alignItems: "center" }}>
