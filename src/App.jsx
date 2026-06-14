@@ -551,7 +551,7 @@ function About() {
           <span style={{ color: "#2563eb", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Who we are</span>
           <h2 style={{ color: "#0f172a", fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 700, margin: "12px 0 20px", lineHeight: 1.25 }}>Technology meets marketing</h2>
           <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8, marginBottom: 16 }}>
-            I'm Ronald, leader of a web design and developement team, with a background in IT and over a decade of experience in marketing and sales. My team combines technical skills with an understanding of what actually converts visitors into buyers.
+            I'm Ronald, leader of a web design and development team, with a background in IT and over a decade of experience in marketing and sales. My team combines technical skills with an understanding of what actually converts visitors into buyers.
           </p>
           <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8, marginBottom: 28 }}>
             Our focus is on KDP authors and small businesses who need a professional online presence without the complexity or cost of a large agency.
